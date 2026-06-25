@@ -7,6 +7,9 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(100))
     name = db.Column(db.String(1000))
     
+    completed_lessons = db.Column(db.JSON, default=[])
+    compledted_challs = db.Column(db.JSON, default=[])
+    
     role = db.Column(db.String(20), default='user')
     
     def has_role(self, role):
