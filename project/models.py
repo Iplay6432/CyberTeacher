@@ -8,7 +8,7 @@ class User(UserMixin, db.Model):
     name = db.Column(db.String(1000))
     
     completed_lessons = db.Column(db.JSON, default=[])
-    compledted_challs = db.Column(db.JSON, default=[])
+    completed_challenges = db.Column(db.JSON, default=[])
     
     role = db.Column(db.String(20), default='user')
     

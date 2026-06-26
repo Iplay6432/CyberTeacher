@@ -12,3 +12,8 @@ def index():
 @login_required
 def profile():
     return render_template('profile.html', name=current_user.name)
+
+@main.route('/challs')
+@login_required
+def challs():
+    return render_template('challs.html')

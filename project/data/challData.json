@@ -1,0 +1,12 @@
+{
+    "challenges": [
+        {
+            "id": 1,
+            "title": "SQL Injection Challenge",
+            "description": "Find the vulnerability in the login form and exploit it to gain access.",
+            "difficulty": "Medium",
+            "help": "Try using common SQL injection techniques like ' OR '1'='1' -- to bypass authentication.",
+            "presentation_link": "https://example.com"
+        }
+    ]
+}

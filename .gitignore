@@ -226,3 +226,15 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Virtual environment (your venv is named 'auth')
+auth/
+
+# SQLite databases (you use db.sqlite, not db.sqlite3)
+*.sqlite
+*.db
+
+# Flask-Migrate
+migrations/__pycache__/
+
+flags.json
