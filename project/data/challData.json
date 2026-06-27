@@ -8,7 +8,45 @@
             "description": "Find the vulnerability in the login form and exploit it to gain access.",
             "difficulty": "Medium",
             "help": "Try using common SQL injection techniques like ' OR '1'='1' -- to bypass authentication.",
-            "presentation_link": "https://example.com"
+            "presentation_link": "https://example.com",
+            "file": "",
+            "link": ""
+        },
+        {
+            "id": 2,
+            "lesson_id": 1,
+            "lesson_title": "SQL Injection",
+            "title": "Blind SQL Injection Challenge",
+            "description": "This challenge requires you to extract data from the database without seeing the output directly.",
+            "difficulty": "Hard",
+            "help": "Use time-based or boolean-based techniques to infer information from the database.",
+            "presentation_link": "",
+            "file": "",
+            "link": ""
+        },
+        {
+            "id": 3,
+            "lesson_id": 2,
+            "lesson_title": "Cross-Site Scripting (XSS)",
+            "title": "Reflected XSS Challenge",
+            "description": "Find a way to inject malicious scripts into the web application.",
+            "difficulty": "Medium",
+            "help": "Look for input fields that reflect user input without proper sanitization.",
+            "presentation_link": "",
+            "file": "",
+            "link": ""
+        },
+        {
+            "id": 4,
+            "lesson_id": 2,
+            "lesson_title": "Cross-Site Scripting (XSS)",
+            "title": "Stored XSS Challenge",
+            "description": "This challenge involves injecting scripts that are stored and executed when other users view the content.",
+            "difficulty": "Hard",
+            "help": "Try to find a way to store your script in the application, such as through comments or user profiles.",
+            "presentation_link": "",
+            "file": "",
+            "link": ""
         }
     ]
 }
