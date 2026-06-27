@@ -57,4 +57,7 @@ def create_app():
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
     
+    from .challenges import challenges as challenges_blueprint
+    app.register_blueprint(challenges_blueprint)
+    
     return app

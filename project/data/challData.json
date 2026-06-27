@@ -2,6 +2,8 @@
     "challenges": [
         {
             "id": 1,
+            "lesson_id": 1,
+            "lesson_title": "SQL Injection",
             "title": "SQL Injection Challenge",
             "description": "Find the vulnerability in the login form and exploit it to gain access.",
             "difficulty": "Medium",

@@ -1,1 +1,135 @@
 {% extends "base.html" %}
+
+{% block content %}
+<div class="card shadow border-0">
+    <div class="card-body">
+        <h2 class="h4 mb-3">Challenges</h2>
+        <div id="challenges-container"></div>
+    </div>
+</div>
+
+<script>
+    async function fetchChallenges() {
+        try {
+            const response = await fetch('/get_challenges');
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+            }
+            return await response.json();
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    function renderChallenges(challenges) {
+        const container = document.getElementById('challenges-container');
+        container.innerHTML = '';
+
+        const grouped = challenges.reduce((acc, challenge) => {
+            const lesson = challenge.lesson_title || 'Other';
+            if (!acc[lesson]) acc[lesson] = [];
+            acc[lesson].push(challenge);
+            return acc;
+        }, {});
+
+        Object.entries(grouped).forEach(([lessonName, lessonChallenges]) => {
+            const lessonSection = document.createElement('div');
+            lessonSection.className = 'mb-4';
+
+            lessonSection.innerHTML = `
+                <h4 class="h5 mb-3">${lessonName}</h4>
+                <div class="row g-3">
+                    ${lessonChallenges.map(challenge => `
+                        <div class="col-md-6">
+                            <div class="card h-100 border-secondary">
+                                <div class="card-body">
+                                    <h5 class="card-title">${challenge.title}</h5>
+                                    <p class="card-text">${challenge.description || ''}</p>
+
+                                    <div class="mt-3">
+                                        <label class="form-label" for="flag-${challenge.id}">Flag</label>
+                                        <input
+                                            class="form-control mb-2"
+                                            id="flag-${challenge.id}"
+                                            name="flag"
+                                            placeholder="Enter flag"
+                                        >
+
+                                        <div class="d-flex flex-wrap gap-2 align-items-center mt-3">
+                                            <button class="btn btn-outline-info btn-sm" data-challenge-id="${challenge.id}" type="button">
+                                                Submit
+                                            </button>
+
+                                            ${challenge.help ? `
+                                                <button
+                                                    class="btn btn-outline-warning btn-sm"
+                                                    type="button"
+                                                    data-bs-toggle="collapse"
+                                                    data-bs-target="#hint-${challenge.id}"
+                                                >
+                                                    Show Hint
+                                                </button>
+                                            ` : ''}
+
+                                            ${challenge.presentation_link ? `
+                                                <a
+                                                    class="btn btn-outline-light btn-sm"
+                                                    href="${challenge.presentation_link}"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                >
+                                                    Open Presentation
+                                                </a>
+                                            ` : ''}
+                                        </div>
+                                    </div>
+
+                                    ${challenge.help ? `
+                                        <div class="collapse mt-2" id="hint-${challenge.id}">
+                                            <div class="alert alert-secondary mb-0">
+                                                ${challenge.help}
+                                            </div>
+                                        </div>
+                                    ` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+
+            container.appendChild(lessonSection);
+
+            lessonChallenges.forEach(challenge => {
+                const input = lessonSection.querySelector(`#flag-${challenge.id}`);
+                const button = lessonSection.querySelector(`button[data-challenge-id="${challenge.id}"]`);
+                const hintDiv = lessonSection.querySelector(`#hint-${challenge.id}`);
+                const hintBtn = lessonSection.querySelector(`button[data-bs-target="#hint-${challenge.id}"]`);
+                const collapse = new bootstrap.Collapse(hintDiv, { toggle: false });
+
+                hintBtn.addEventListener('click', () => {
+                    collapse.toggle();
+                });
+                button.addEventListener('click', async () => {
+                    const flag = input.value.trim();
+                    console.log(`Submitting flag for challenge ${challenge.id}: ${flag}`);
+                });
+
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        button.click();
+                    }
+                });
+            });
+        });
+    }
+
+    async function init() {
+        const data = await fetchChallenges();
+        const challenges = data?.challenges || [];
+        renderChallenges(challenges);
+    }
+    init();
+</script>
+{% endblock %}
