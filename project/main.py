@@ -16,4 +16,4 @@ def profile():
 @main.route('/challs')
 @login_required
 def challs():
-    return render_template('challs.html')
+    return render_template('challs.html', completed_challenges=current_user.completed_challenges or [])

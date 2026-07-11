@@ -37,16 +37,22 @@ def submit_challenge():
     user_id = current_user.id
     user_flag = data.get('flag')
     chall_id = data.get('challenge_id')
+    
     if not user_flag or not chall_id:
-        return Response(response=json.dumps({"error": "Missing flag or challenge_id"}), status=400, mimetype='application/json')
+        print("Missing flag or challenge_id")
+        return Response(response=json.dumps({"error": "Missing flag or challenge_id"}), status=400, mimetype='application/x-www-form-urlencoded')
+        print("Missing flag or challenge_id")
     print(f"User {user_id} submitted flag: {user_flag} for challenge {chall_id}")
     for flag in flags:
-        if flag['challenge_id'] == int(chall_id):
+        if flag['id'] == int(chall_id):
             if flag['flag'] == user_flag:
-                finished_challenges = current_user.completed_challenges if current_user.completed_challenges else []
+                finished_challenges = list(current_user.completed_challenges or [])
                 print(finished_challenges)
                 finished_challenges.append(int(chall_id))
                 current_user.completed_challenges = finished_challenges
-                
+                print(current_user.completed_challenges)
+                db.session.commit()
+                return Response(response=json.dumps({"success": "Flag is correct"}), status=200, mimetype='application/x-www-form-urlencoded')
             else:
-                return Response(response=json.dumps({"error": "Invalid flag"}), status=400, mimetype='application/json')
+                print("Invalid flag")
+                return Response(response=json.dumps({"error": "Invalid flag"}), status=401, mimetype='application/x-www-form-urlencoded')
