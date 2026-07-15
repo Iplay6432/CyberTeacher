@@ -4,6 +4,7 @@ from flask import Flask, app
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_migrate import Migrate
+from flask_wtf.csrf import CSRFProtect
 import os
 
 # Initialize SQLAlchemy instance (outside create_app for import access)
@@ -11,6 +12,8 @@ db = SQLAlchemy()
 
 def create_app():
     app = Flask(__name__)
+    # csrf = CSRFProtect()
+    # csrf.init_app(app)
     # Configuration
     app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('SQLALCHEMY_DATABASE_URI', 'sqlite:///db.sqlite')

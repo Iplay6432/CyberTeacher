@@ -3,13 +3,13 @@
         {
             "id": 1,
             "lesson_id": 1,
-            "lesson_title": "SQL Injection",
-            "title": "SQL Injection Challenge",
-            "description": "Find the vulnerability in the login form and exploit it to gain access.",
+            "lesson_title": "Python Basics",
+            "title": "How do you run a .py file?",
+            "description": "I wonder what the answer is. I have a .py file and I want to run it. How do I do that?",
             "difficulty": "Medium",
-            "help": "Try using common SQL injection techniques like ' OR '1'='1' -- to bypass authentication.",
+            "help": "Try installing python and running the file from the command line using 'python filename.py'.",
             "presentation_link": "https://example.com",
-            "file": "",
+            "files": ["pythonBasicsRun.py"],
             "link": ""
         },
         {
@@ -21,7 +21,7 @@
             "difficulty": "Hard",
             "help": "Use time-based or boolean-based techniques to infer information from the database.",
             "presentation_link": "",
-            "file": "",
+            "files": "",
             "link": ""
         },
         {
@@ -33,7 +33,7 @@
             "difficulty": "Medium",
             "help": "Look for input fields that reflect user input without proper sanitization.",
             "presentation_link": "",
-            "file": "",
+            "files": "",
             "link": ""
         },
         {
@@ -45,7 +45,7 @@
             "difficulty": "Hard",
             "help": "Try to find a way to store your script in the application, such as through comments or user profiles.",
             "presentation_link": "",
-            "file": "",
+            "files": "",
             "link": ""
         }
     ]

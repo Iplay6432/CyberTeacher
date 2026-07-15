@@ -4,9 +4,11 @@ from .models import User
 from . import db
 import json
 import os
+from pathlib import Path
 
 challenges = Blueprint('challenges', __name__)
 cwd = os.getcwd()
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 flags = {}
 file = "project/data/flags.json"
@@ -17,7 +19,6 @@ with open(file, 'r') as f:
     flags = json.load(f)
     flags = flags["flags"]
     f.close()
-print(flags)
 
 @challenges.route('/get_challenges', methods=['GET'])
 @login_required
@@ -39,9 +40,7 @@ def submit_challenge():
     chall_id = data.get('challenge_id')
     
     if not user_flag or not chall_id:
-        print("Missing flag or challenge_id")
         return Response(response=json.dumps({"error": "Missing flag or challenge_id"}), status=400, mimetype='application/x-www-form-urlencoded')
-        print("Missing flag or challenge_id")
     print(f"User {user_id} submitted flag: {user_flag} for challenge {chall_id}")
     for flag in flags:
         if flag['id'] == int(chall_id):
