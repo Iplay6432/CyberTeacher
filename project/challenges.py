@@ -46,12 +46,9 @@ def submit_challenge():
         if flag['id'] == int(chall_id):
             if flag['flag'] == user_flag:
                 finished_challenges = list(current_user.completed_challenges or [])
-                print(finished_challenges)
                 finished_challenges.append(int(chall_id))
                 current_user.completed_challenges = finished_challenges
-                print(current_user.completed_challenges)
                 db.session.commit()
                 return Response(response=json.dumps({"success": "Flag is correct"}), status=200, mimetype='application/x-www-form-urlencoded')
             else:
-                print("Invalid flag")
                 return Response(response=json.dumps({"error": "Invalid flag"}), status=401, mimetype='application/x-www-form-urlencoded')

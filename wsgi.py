@@ -5,7 +5,7 @@ from project.challenge_websites.challTemplate import challTemplate as chall_temp
 import os
 
 URL = os.environ.get('URL', 'localhost')
-PORT = os.environ.get('PORT', 5000)
+PORT = int(os.environ.get('PORT', 5000))
 DEBUG = os.environ.get("FLASK_DEBUG", "0")
 
 main_app = create_app()

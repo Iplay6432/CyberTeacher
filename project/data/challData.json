@@ -6,7 +6,7 @@
             "lesson_title": "Python Basics",
             "title": "How do you run a .py file?",
             "description": "I wonder what the answer is. I have a .py file and I want to run it. How do I do that?",
-            "difficulty": "Medium",
+            "difficulty": "Easy",
             "help": "Try installing python and running the file from the command line using 'python filename.py'.",
             "presentation_link": "https://example.com",
             "files": ["pythonBasicsRun.py"],
